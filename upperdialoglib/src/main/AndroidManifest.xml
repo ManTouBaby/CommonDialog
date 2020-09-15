@@ -5,10 +5,5 @@
         <activity
             android:name=".view.UpperActivity"
             android:theme="@style/LayerActivityTheme" />
-        <provider
-            android:name=".pro.ActivityProvider"
-            android:authorities="${applicationId}.activityprovider"
-            android:exported="false"
-            android:multiprocess="true" />
     </application>
 </manifest>

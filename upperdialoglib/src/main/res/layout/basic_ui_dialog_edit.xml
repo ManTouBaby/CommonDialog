@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:background="@drawable/bg_press_color_surface_radius_def"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/basic_ui_tv_dialog_edit_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginTop="@dimen/round_radius"
+        android:gravity="center"
+        android:textColor="@color/text_surface"
+        android:textSize="@dimen/text_title"
+        tools:text="提示" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line" />
+    <EditText
+        android:id="@+id/basic_ui_tv_dialog_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="start|top"
+        android:hint="请输入..."
+        android:textColor="#333"
+        android:minHeight="128dp"
+        android:textSize="14sp"
+        android:padding="12dp" />
+
+    <View
+        android:id="@+id/basic_ui_v_dialog_edit_line_h"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:id="@+id/basic_ui_ll_dialog_edit_yes_no"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/basic_ui_tv_dialog_edit_no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/text_third"
+            android:textSize="@dimen/text_content"
+            tools:text="@string/basic_ui_dialog_btn_no" />
+
+        <View
+            android:id="@+id/basic_ui_v_dialog_edit_line"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/basic_ui_tv_dialog_edit_yes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/text_main"
+            android:textSize="@dimen/text_content"
+            tools:text="@string/basic_ui_dialog_btn_yes" />
+
+    </LinearLayout>
+
+</LinearLayout>

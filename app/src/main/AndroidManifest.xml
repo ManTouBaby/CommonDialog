@@ -16,27 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".DialogActivity"
-            android:configChanges="orientation|screenSize|keyboard" />
-        <activity
-            android:name=".PopupActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:configChanges="orientation|screenSize|keyboard" />
-
-        <activity
-            android:name=".ToastActivity"
-            android:configChanges="orientation|screenSize|keyboard" />
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path" />
-        </provider>
+        <activity android:name=".DialogActivity" />
+        <activity android:name=".PopupActivity" />
+        <activity android:name=".ToastActivity" />
     </application>
 
 </manifest>

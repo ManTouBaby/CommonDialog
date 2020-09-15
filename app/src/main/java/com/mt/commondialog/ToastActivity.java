@@ -36,8 +36,6 @@ public class ToastActivity extends AppCompatActivity implements View.OnClickList
            R.id.tv_show_success,
            R.id.tv_show_fail,
            R.id.tv_show_normal,
-
-
    })
     @Override
     public void onClick(View v) {
