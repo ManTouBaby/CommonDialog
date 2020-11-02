@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 
 import com.mt.commondialog.utils.ToastUtils;
+import com.mt.commondialog.utils.dialog.DownloadDialog;
 import com.zlylib.upperdialog.EditDialog;
 import com.zlylib.upperdialog.ListDialog;
 import com.zlylib.upperdialog.LoadingDialog;
@@ -144,12 +145,13 @@ public class MainActivity extends AppCompatActivity {
 
                     //https://pdds-cdn.uc.cn/27-0/QuarkBrowser/2004/a918c565822ca56db5d5b3602b635ba1/QuarkBrowser_V4.1.0.132_android_pf3300_(Build200428142217).apk?auth_key=1589333697-0-0-a5e5c76b8bfc2a22c261511c3a3befac&SESSID=c0d03eea699479f67804585998605065
 //                        download("",url,"",false);
+//                    DownloadDialog.with(MainActivity.this, isForce, url);
                     break;
                 case 4:
                     EditDialog.with(this)
                             .content("我是输入框数据我是输入框数据我是输入框数据我是输入框数据我是输入框数据")
                             .title("勤务汇报")
-                            .listener(label -> {
+                            .listener((editView, label) -> {
                                 System.out.println("我是汇报数据---->" + label);
                             })
                             .show();

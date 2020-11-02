@@ -13,11 +13,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
-import com.zlylib.upperdialog.manager.Layer;
-import com.zlylib.upperdialog.utils.ResUtils;
-import com.zlylib.upperdialog.utils.Utils;
 import com.zlylib.upperdialog.view.DragLayout;
 
 import static com.zlylib.upperdialog.utils.ResUtils.getResources;
@@ -40,6 +35,7 @@ public class EditDialog {
     private boolean noYesBtn;//是否显示确定
     private boolean noNoBtn = false;//是否显示取消
     private boolean cancelable = true;
+    private EditText editText;
 
     public static EditDialog with(Context context) {
         return new EditDialog(context);
@@ -129,7 +125,7 @@ public class EditDialog {
                 .cancelableOnTouchOutside(cancelable)
                 .cancelableOnClickKeyBack(cancelable)
                 .bindData(layer -> {
-                    EditText editText = layer.getView(R.id.basic_ui_tv_dialog_edit);
+                    editText = layer.getView(R.id.basic_ui_tv_dialog_edit);
                     editText.setText(inputContent);
                     editText.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -199,7 +195,7 @@ public class EditDialog {
                 })
                 .onClickToDismiss((layer, v) -> {
                     if (mOnEditInputListener != null) {
-                        mOnEditInputListener.OnEditInput(inputContent);
+                        mOnEditInputListener.OnEditInput(editText,inputContent);
                     }
                 }, R.id.basic_ui_tv_dialog_edit_yes)
                 .onClickToDismiss(R.id.basic_ui_tv_dialog_edit_no)
@@ -207,6 +203,6 @@ public class EditDialog {
     }
 
     public interface OnEditInputListener {
-        void OnEditInput(CharSequence label);
+        void OnEditInput(EditText editText,CharSequence label);
     }
 }
