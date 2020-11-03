@@ -1,6 +1,5 @@
 package com.mt.commondialog;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +15,11 @@ import android.widget.Toast;
 
 
 import com.mt.commondialog.utils.ToastUtils;
-import com.mt.commondialog.utils.dialog.DownloadDialog;
-import com.zlylib.upperdialog.EditDialog;
-import com.zlylib.upperdialog.ListDialog;
-import com.zlylib.upperdialog.LoadingDialog;
-import com.zlylib.upperdialog.TipDialog;
-import com.zlylib.upperdialog.listener.SimpleCallback;
+import com.hy.upperdialog.EditDialog;
+import com.hy.upperdialog.ListDialog;
+import com.hy.upperdialog.LoadingDialog;
+import com.hy.upperdialog.TipDialog;
+import com.hy.upperdialog.listener.SimpleCallback;
 
 import java.util.ArrayList;
 import java.util.List;

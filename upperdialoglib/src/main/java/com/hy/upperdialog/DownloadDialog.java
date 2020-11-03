@@ -1,17 +1,13 @@
-package com.mt.commondialog.utils.dialog;
+package com.hy.upperdialog;
 
 import android.app.Activity;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
-import com.mt.commondialog.R;
-import com.mt.commondialog.utils.DownloadUtils;
-import com.mt.commondialog.utils.FileUtils;
-import com.hy.upperdialog.Upper;
 import com.hy.upperdialog.manager.Layer;
+import com.hy.upperdialog.utils.DownloadUtils;
+import com.hy.upperdialog.utils.FileUtils;
 import com.hy.upperdialog.utils.ResUtils;
 import com.hy.upperdialog.utils.Utils;
 
@@ -34,6 +30,8 @@ public class DownloadDialog {
     private TextView tvProgress;
     private TextView tvApkSize;
     private TextView tvState;
+    private TextView tvContent;
+    private TextView tvTitle;
     private File mApk;
 
     public static DownloadDialog with(Activity activity, boolean isForce, String url) {
@@ -54,6 +52,16 @@ public class DownloadDialog {
         return this;
     }
 
+    public DownloadDialog setTitle(String label) {
+        tvTitle.setText(label);
+        return this;
+    }
+
+    public DownloadDialog setContent(String label) {
+        tvContent.setText(label);
+        return this;
+    }
+
     private void startDownload(String url) {
         DownloadUtils.download(url, new DownloadUtils.DownloadListener() {
             @Override
@@ -64,12 +72,7 @@ public class DownloadDialog {
             @Override
             public void onDownloadLength(final int length) {
                 if (tvApkSize != null) {
-                    mActivity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tvApkSize.setText(FileUtils.formatSize(length));
-                        }
-                    });
+                    mActivity.runOnUiThread(() -> tvApkSize.setText(FileUtils.formatSize(length)));
                 }
             }
 
@@ -97,27 +100,22 @@ public class DownloadDialog {
                 .backgroundDimDefault()
                 .cancelableOnTouchOutside(false)
                 .cancelableOnClickKeyBack(false)
-                .bindData(new Layer.DataBinder() {
-                    @Override
-                    public void bindData(Layer layer) {
-                        progressBar = layer.getView(R.id.basic_ui_pb_dialog_download);
-                        tvProgress = layer.getView(R.id.basic_ui_tv_dialog_download_progress);
-                        tvApkSize = layer.getView(R.id.basic_ui_tv_dialog_download_apk_size);
-                        tvState = layer.getView(R.id.basic_ui_tv_dialog_download_state);
-
-                    }
+                .bindData(layer -> {
+                    progressBar = layer.getView(R.id.basic_ui_pb_dialog_download);
+                    tvProgress = layer.getView(R.id.basic_ui_tv_dialog_download_progress);
+                    tvApkSize = layer.getView(R.id.basic_ui_tv_dialog_download_apk_size);
+                    tvState = layer.getView(R.id.basic_ui_tv_dialog_download_state);
+                    tvContent = layer.getView(R.id.basic_ui_tv_dialog_download_content);
+                    tvTitle = layer.getView(R.id.basic_ui_tv_dialog_download_title);
                 })
-                .onClick(new Layer.OnClickListener() {
-                    @Override
-                    public void onClick(Layer layer, View v) {
-                        if (mApk == null) {
-                            return;
-                        }
-                        if (!isForce) {
-                            dismiss();
-                        }
-                        DownloadUtils.installApk(mActivity, mApk);
+                .onClick((layer, v) -> {
+                    if (mApk == null) {
+                        return;
                     }
+                    if (!isForce) {
+                        dismiss();
+                    }
+                    DownloadUtils.installApk(mActivity, mApk);
                 }, R.id.basic_ui_tv_dialog_download_state);
         upperLayer.show();
     }
@@ -134,7 +132,7 @@ public class DownloadDialog {
             tvProgress.setText("0");
         }
         if (tvState != null) {
-            tvState.setText(com.hy.upperdialog.R.string.basic_ui_dialog_download_state_downloading);
+            tvState.setText(R.string.basic_ui_dialog_download_state_downloading);
         }
     }
 
@@ -147,8 +145,8 @@ public class DownloadDialog {
         }
         if (progress >= 100) {
             if (tvState != null) {
-                tvState.setText(com.hy.upperdialog.R.string.basic_ui_dialog_download_state_install);
-                tvState.setTextColor(ResUtils.getColor(mActivity, com.hy.upperdialog.R.color.text_main));
+                tvState.setText(R.string.basic_ui_dialog_download_state_install);
+                tvState.setTextColor(ResUtils.getColor(mActivity, R.color.text_main));
             }
         }
     }

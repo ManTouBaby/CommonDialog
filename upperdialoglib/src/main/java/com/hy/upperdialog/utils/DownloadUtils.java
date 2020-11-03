@@ -1,4 +1,4 @@
-package com.mt.commondialog.utils;
+package com.hy.upperdialog.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,9 +7,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
-
-
-import com.hy.upperdialog.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;

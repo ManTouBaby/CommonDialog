@@ -8,9 +8,9 @@ import android.view.Gravity;
 import android.view.View;
 
 import com.mt.commondialog.R;
-import com.zlylib.upperdialog.Upper;
-import com.zlylib.upperdialog.common.AnimatorHelper;
-import com.zlylib.upperdialog.manager.Layer;
+import com.hy.upperdialog.Upper;
+import com.hy.upperdialog.common.AnimatorHelper;
+import com.hy.upperdialog.manager.Layer;
 
 import java.util.Random;
 

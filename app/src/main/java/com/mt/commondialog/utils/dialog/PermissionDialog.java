@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mt.commondialog.R;
-import com.zlylib.upperdialog.Upper;
-import com.zlylib.upperdialog.listener.SimpleCallback;
-import com.zlylib.upperdialog.manager.Layer;
+import com.hy.upperdialog.Upper;
+import com.hy.upperdialog.listener.SimpleCallback;
+import com.hy.upperdialog.manager.Layer;
 
 
 /**

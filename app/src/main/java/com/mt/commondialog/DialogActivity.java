@@ -11,12 +11,12 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 
-import com.zlylib.upperdialog.Upper;
-import com.zlylib.upperdialog.common.AnimatorHelper;
-import com.zlylib.upperdialog.dialog.DialogLayer;
-import com.zlylib.upperdialog.manager.Layer;
-import com.zlylib.upperdialog.view.DragLayout;
-import com.zlylib.upperdialog.view.UpperActivity;
+import com.hy.upperdialog.Upper;
+import com.hy.upperdialog.common.AnimatorHelper;
+import com.hy.upperdialog.dialog.DialogLayer;
+import com.hy.upperdialog.manager.Layer;
+import com.hy.upperdialog.view.DragLayout;
+import com.hy.upperdialog.view.UpperActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

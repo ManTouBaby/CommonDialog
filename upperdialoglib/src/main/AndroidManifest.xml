@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zlylib.upperdialog">
+    package="com.hy.upperdialog">
 
     <application>
         <activity
-            android:name=".view.UpperActivity"
+            android:name="com.hy.upperdialog.view.UpperActivity"
             android:theme="@style/LayerActivityTheme" />
     </application>
 </manifest>

@@ -8,10 +8,10 @@ import android.view.View;
 
 
 
-import com.zlylib.upperdialog.Upper;
-import com.zlylib.upperdialog.common.Align;
-import com.zlylib.upperdialog.common.AnimatorHelper;
-import com.zlylib.upperdialog.dialog.DialogLayer;
+import com.hy.upperdialog.Upper;
+import com.hy.upperdialog.common.Align;
+import com.hy.upperdialog.common.AnimatorHelper;
+import com.hy.upperdialog.dialog.DialogLayer;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
