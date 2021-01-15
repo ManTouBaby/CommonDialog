@@ -92,7 +92,7 @@ public class DownloadDialog {
 
     private void showDialog() {
         upperLayer = Upper.dialog(mActivity)
-                .contentView(R.layout.basic_ui_dialog_download)
+                .contentView(R.layout.dialog_download)
                 .gravity(Gravity.CENTER)
                 .backgroundDimDefault()
                 .cancelableOnTouchOutside(false)

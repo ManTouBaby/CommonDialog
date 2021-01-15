@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 
+import com.hy.upperdialog.DownloadDialog;
 import com.mt.commondialog.utils.ToastUtils;
 import com.hy.upperdialog.EditDialog;
 import com.hy.upperdialog.ListDialog;
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     App.sHandler.postDelayed(dialog::dismiss, 2000);
                     break;
                 case 1://TipDialog
-                    TipDialog.with(MainActivity.this)
+                    TipDialog.with(MainActivity.this, false)
                             // .yesTextColor(R.color.colorAccent)
                             //.setAdaption(false)
                             //.setAdaptionSize(false,300)
@@ -138,12 +139,18 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                     break;
                 case 3://DownloadDialog
-                    String url = "https://download.xloong.com/app/ARFusionMedia_20200508__v0.0.2.apk";
+//                    String url = "https://download.xloong.com/app/ARFusionMedia_20200508__v0.0.2.apk";
                     // String url="https://pdds-cdn.uc.cn/27-0/QuarkBrowser/2004/a918c565822ca56db5d5b3602b635ba1/QuarkBrowser_V4.1.0.132_android_pf3300_(Build200428142217).apk?auth_key=1589333697-0-0-a5e5c76b8bfc2a22c261511c3a3befac&SESSID=c0d03eea699479f67804585998605065";
 
                     //https://pdds-cdn.uc.cn/27-0/QuarkBrowser/2004/a918c565822ca56db5d5b3602b635ba1/QuarkBrowser_V4.1.0.132_android_pf3300_(Build200428142217).apk?auth_key=1589333697-0-0-a5e5c76b8bfc2a22c261511c3a3befac&SESSID=c0d03eea699479f67804585998605065
 //                        download("",url,"",false);
-//                    DownloadDialog.with(MainActivity.this, isForce, url);
+                    String url = "http://20.97.0.221:7000/sjzh3/fileserver-sjzh/file/downloadFile.do?id=7a107cb6-e431-46c7-94d9-3a0bad27ec6a";
+//                    DownloadDialog.with(MainActivity.this, true, url).setAutoInstall(true);
+                    DownloadDialog.with(this, true,url)
+                            .setAutoInstall(true)
+                            .setFileName("zhsx.apk")
+                            .setTitle("指挥视讯")
+                            .startDownload();
                     break;
                 case 4:
                     EditDialog.with(this)

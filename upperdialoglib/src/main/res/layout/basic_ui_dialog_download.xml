@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/basic_ui_tv_dialog_download_content"
+        android:id="@+id/basic_ui_tv_dialog_download_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_def"

@@ -2,8 +2,9 @@
 
 buildscript {
     repositories {
-        google()
-        jcenter()
+	        maven{url 'http://120.24.32.87:9081/repository/maven-public/'}
+      //  google()
+      //  jcenter()
 
     }
     dependencies {
@@ -16,9 +17,10 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-        maven { url 'https://jitpack.io' }
+	        maven{url 'http://120.24.32.87:9081/repository/maven-public/'}
+     //   google()
+     //   jcenter()
+     //   maven { url 'https://jitpack.io' }
     }
 }
 

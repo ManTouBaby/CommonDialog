@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,12 +26,12 @@ import java.net.URL;
 public class DownloadUtils {
 
 
-    private DownloadUtils(String url, DownloadListener listener) {
-        new DownloadApk(listener).execute(url);
+    private DownloadUtils(String url, String fileName, DownloadListener listener) {
+        new DownloadApk(fileName, listener).execute(url);
     }
 
-    public static DownloadUtils download(String url, DownloadListener listener) {
-        return new DownloadUtils(url, listener);
+    public static DownloadUtils download(String url, String fileName, DownloadListener listener) {
+        return new DownloadUtils(url, fileName, listener);
     }
 
     public static void installApk(Context context, String filePath) {
@@ -45,16 +46,36 @@ public class DownloadUtils {
         if (file == null || !file.exists() || !file.isFile()) {
             return;
         }
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Uri apkUri = FileProvider.getUriForFile(context, Utils.getAppContext().getPackageName() + ".fileprovider", file);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+        if (Build.VERSION.SDK_INT >= 24) {
+//            String packName=BluetoothContext.pIns.appContext.getPackageName();
+            Uri apkUri = FileProvider.getUriForFile(context, context.getPackageName() + ".UpperDialogProvider", file);
+            Intent install = new Intent(Intent.ACTION_VIEW);
+            install.addCategory(Intent.CATEGORY_DEFAULT);
+            install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            install.setDataAndType(apkUri, "application/vnd.android.package-archive");
+            context.startActivity(install);
         } else {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            intent.setType("application/vnd.android.package-archive");
+            intent.setData(Uri.fromFile(file));
             intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         }
-        context.startActivity(intent);
+
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            Uri apkUri = FileProvider.getUriForFile(context, context.getPackageName()+".UpperDialogProvider", file);
+//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+//        } else {
+//            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+//        }
+//        context.startActivity(intent);
     }
 
     public interface DownloadListener {
@@ -71,10 +92,11 @@ public class DownloadUtils {
      * 通过路径去下载
      **/
     static class DownloadApk extends AsyncTask<String, Integer, File> {
-
+        private String fileName;
         private final DownloadListener downloadListener;
 
-        DownloadApk(DownloadListener listener) {
+        DownloadApk(String fileName, DownloadListener listener) {
+            this.fileName = fileName;
             this.downloadListener = listener;
         }
 
@@ -84,13 +106,9 @@ public class DownloadUtils {
             try {
                 URL url = new URL(params[0]);
                 try {
-                    final String fileName = Utils.getAppContext().getPackageName() + ".apk";
+                    final String fileName = TextUtils.isEmpty(this.fileName) ? Utils.getAppContext().getPackageName() + ".apk" : this.fileName;
                     String parentPath;
-                    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-                        parentPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-                    } else {
-                        parentPath = Environment.getDownloadCacheDirectory().getAbsolutePath();
-                    }
+                    parentPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + Utils.getAppContext().getPackageName() + File.separator + "appFiles";
                     File tmpFile = new File(parentPath);
                     if (!tmpFile.exists()) {
                         tmpFile.mkdirs();

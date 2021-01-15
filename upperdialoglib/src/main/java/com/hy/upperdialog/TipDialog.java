@@ -30,27 +30,31 @@ public class TipDialog {
     private CharSequence msg;
     private CharSequence yesText;
     private CharSequence noText;
-    private int yesTextColor=0;
-    private int noTextColor=0;
+    private int yesTextColor = 0;
+    private int noTextColor = 0;
     private boolean singleBtnYes = false;
     /**
-    * 是否自适应
-     *  true 根据屏幕大小自适应
-     *  false 固定弹窗大小
-    * */
+     * 是否自适应
+     * true 根据屏幕大小自适应
+     * false 固定弹窗大小
+     */
     private boolean isadaption = true;
-    private int  WidthSize = 400;//设置默认宽度
-    private boolean cancelable = true;
+    private int WidthSize = 400;//设置默认宽度
+//    private boolean cancelable = true;
     private SimpleCallback<Void> callbackYes = null;
     private SimpleCallback<Void> callbackNo = null;
     private SimpleCallback<Void> onDismissListener = null;
     private DialogLayer mDialogLayer;
 
     public static TipDialog with(Context context) {
-        return new TipDialog(context);
+        return new TipDialog(context, true);
     }
 
-    private TipDialog(Context context) {
+    public static TipDialog with(Context context, boolean cancelable) {
+        return new TipDialog(context, cancelable);
+    }
+
+    private TipDialog(Context context, boolean cancelable) {
         this.context = context;
         Utils.init(context);
         mDialogLayer = Upper.dialog(context);
@@ -75,21 +79,22 @@ public class TipDialog {
                     @Override
                     public void bindData(Layer layer) {
                         LinearLayout basic_ll_tip = layer.getView(R.id.basic_ll_tip);
-                        if(!isadaption){
+                        if (!isadaption) {
                             ViewGroup.LayoutParams lp;
-                            lp= basic_ll_tip.getLayoutParams();
-                           // int size=getResources().getDimensionPixelSize(R.dimen.ll__width);
-                            lp.width= ((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, WidthSize, getResources().getDisplayMetrics()));;
+                            lp = basic_ll_tip.getLayoutParams();
+                            // int size=getResources().getDimensionPixelSize(R.dimen.ll__width);
+                            lp.width = ((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, WidthSize, getResources().getDisplayMetrics()));
+                            ;
                             basic_ll_tip.setLayoutParams(lp);
                         }
                         TextView tvYes = layer.getView(R.id.basic_ui_tv_dialog_tip_yes);
                         TextView tvNo = layer.getView(R.id.basic_ui_tv_dialog_tip_no);
                         View vLine = layer.getView(R.id.basic_ui_v_dialog_tip_line);
 
-                        if(yesTextColor!=0){
+                        if (yesTextColor != 0) {
                             tvYes.setTextColor(getResources().getColor(yesTextColor));
                         }
-                        if(noTextColor!=0){
+                        if (noTextColor != 0) {
                             tvNo.setTextColor(getResources().getColor(noTextColor));
                         }
                         if (singleBtnYes) {
@@ -161,6 +166,7 @@ public class TipDialog {
         this.noText = context.getString(noText);
         return this;
     }
+
     public TipDialog yesTextColor(@ColorRes int yesColor) {
         this.yesTextColor = yesColor;
         return this;
@@ -195,20 +201,22 @@ public class TipDialog {
         singleBtnYes = true;
         return this;
     }
+
     public TipDialog setAdaption(boolean isadaption) {
         this.isadaption = isadaption;
         return this;
     }
-    public TipDialog setAdaptionSize(boolean isadaption,int WidthSize) {
+
+    public TipDialog setAdaptionSize(boolean isadaption, int WidthSize) {
         this.isadaption = isadaption;
         this.WidthSize = WidthSize;
         return this;
     }
 
-    public TipDialog cancelable(boolean cancelable) {
-        this.cancelable = cancelable;
-        return this;
-    }
+//    public TipDialog cancelable(boolean cancelable) {
+//        this.cancelable = cancelable;
+//        return this;
+//    }
 
     public TipDialog onYes(SimpleCallback<Void> callback) {
         callbackYes = callback;

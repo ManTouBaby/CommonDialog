@@ -25,6 +25,8 @@ public class DownloadDialog {
     private Layer upperLayer = null;
     private final boolean isForce;
     private boolean isAutoInstall = true;
+    private String fileName;
+    private String url;
 
     private ProgressBar progressBar;
     private TextView tvProgress;
@@ -41,14 +43,20 @@ public class DownloadDialog {
 
     private DownloadDialog(Activity activity, boolean isForce, String url) {
         Utils.init(activity);
+        this.url = url;
         this.mActivity = activity;
         this.isForce = isForce;
         showDialog();
-        startDownload(url);
+
     }
 
     public DownloadDialog setAutoInstall(boolean autoInstall) {
         isAutoInstall = autoInstall;
+        return this;
+    }
+
+    public DownloadDialog setFileName(String fileName) {
+        this.fileName = fileName;
         return this;
     }
 
@@ -62,8 +70,8 @@ public class DownloadDialog {
         return this;
     }
 
-    private void startDownload(String url) {
-        DownloadUtils.download(url, new DownloadUtils.DownloadListener() {
+    public void startDownload() {
+        DownloadUtils.download(this.url, this.fileName, new DownloadUtils.DownloadListener() {
             @Override
             public void onPreExecute() {
                 preDownload();
@@ -105,7 +113,7 @@ public class DownloadDialog {
                     tvProgress = layer.getView(R.id.basic_ui_tv_dialog_download_progress);
                     tvApkSize = layer.getView(R.id.basic_ui_tv_dialog_download_apk_size);
                     tvState = layer.getView(R.id.basic_ui_tv_dialog_download_state);
-                    tvContent = layer.getView(R.id.basic_ui_tv_dialog_download_content);
+                    tvContent = layer.getView(R.id.basic_ui_tv_dialog_download_label);
                     tvTitle = layer.getView(R.id.basic_ui_tv_dialog_download_title);
                 })
                 .onClick((layer, v) -> {
