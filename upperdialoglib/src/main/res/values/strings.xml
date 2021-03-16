@@ -12,5 +12,5 @@
 
     <!--==========================版本下载============================-->
     <string name="basic_ui_dialog_download_state_downloading">下载中...</string>
-    <string name="basic_ui_dialog_download_state_install">立即安装</string>
+    <string name="basic_ui_dialog_download_state_install">点击安装</string>
 </resources>
